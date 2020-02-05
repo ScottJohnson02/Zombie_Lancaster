@@ -1,20 +1,23 @@
 import zombie_scenes as zombie
 
 
-class falling(zombie.Scene):
+class Fell(zombie.Scene):
     def death(self):
         print("You fell and died")
 
 
-class eaten(zombie.Scene):
+class Eaten(zombie.Scene):
     def death(self):
         print("You got eaten and died")
 
 
-class shot(zombie.Scene):
+class Shot(zombie.Scene):
     def death(self):
         print("You got shot and died")
 
 
-test = falling()
-test.help()
+deaths = {
+    'shot': Shot(),
+    'eaten': Eaten(),
+    'fell': Fell()
+}
