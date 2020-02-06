@@ -61,16 +61,19 @@ class CreateEncounter(object):
                 f'YOUR CURRENT HEALTH: {self.player.hp} ENEMY HEALTH: {self.enemy.hp}')
             self.enemy.hp = human_crit_calc(self.player.atk, self.player.name,
                                             self.enemy.defense, self.enemy.hp)
+            if self.enemy.hp <= 0:
+                print(f"{self.player.name} has killed {self.enemy.name}!")
+                print(f'YOUR REMAINING HEALTH: {self.player.hp}')
+                break
+
             time.sleep(1.5)
+
             self.player.hp = zombie_crit_calc(self.enemy.atk, self.enemy.name,
                                               self.player.defense, self.player.hp)
+            if self.player.hp <= 0:
+                print(f"{self.enemy.name} has killed you GAME OVER!")
+                quit()
             time.sleep(1.5)
-        if enemy.hp > 0:
-            print(f"{self.enemy.name} has killed you GAME OVER!")
-            quit()
-        else:
-            print(f"{self.player.name} has killed {self.enemy.name}!")
-            print(f'YOUR REMAINING HEALTH: {self.player.hp}')
 
 
 # bruh = CreateEncounter()

@@ -3,8 +3,8 @@ class Player(object):
         self.hp = 20
         self.name = name
         self.friend = friend
-        self.atk = 2
+        self.atk = 3
         self.defense = 1
 
 
-character = Player('scoot', 'bruh')
+character = Player('You', 'bruh')

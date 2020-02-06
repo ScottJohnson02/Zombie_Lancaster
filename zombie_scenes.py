@@ -1,10 +1,15 @@
 import inventory
 import loot
 import random
+
 # need dedent
 
 
 class Scene(object):
+    def __init__(self):
+        self.inventory_system = inventory.inventory
+    # generic scene
+
     def help(self):
         print("""COMMANDS: loot - allows you to loot a building and search for items
 leave - don't loot an area and continue walking
@@ -23,23 +28,42 @@ help - enters this screen""")
             self.loot.find(risk)
 
     def inventory(self):
-        self.inventory = inventory.inventory
-        self.inventory.print_items()
+        self.inventory_system.equip()
+        return self.enter()
 
+    def inventory2(self):
+        self.inventory_system.equip()
+        return 'next'
 
-# bruh = Scene()
-# bruh.loot(6)
+    def loot_Success(self):
+        print("Do you want to do anything before you go to the next location? type continue to continue")
+        choice = input("> ")
+        if choice.upper() == "HELP":
+            return self.help()
+        elif choice.upper() == "DIE":
+            print("Wrong move")
+            return "death"
+        elif choice.upper() == "CONTINUE":
+            print("You decided to head on the road")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory2()
+        else:
+            print("INVALID MOVE")
+            return self.loot_Success()
 
 
 class Start(Scene):
     def enter(self):
         print("""Welcome to Lancaster
-TYPE Help to learn to play or type start to start your adventure""")
+TYPE Help to learn to play or type start to start your adventure you can also type
+inventory to equip items before your adventure""")
         choice = input("> ")
         if choice.upper() == "HELP":
             return self.help()
         elif choice.upper() == "START":
             print("")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory()
         else:
             print("INVALID MOVE")
             return self.enter()
@@ -53,12 +77,16 @@ class Apartment(Scene):
             return self.help()
         elif choice.upper() == "LOOT":
             print("You loot the apartment")
-            return self.loot(1)
+            self.loot(1)
+            return self.loot_Success()
+
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"
         elif choice.upper() == "LEAVE":
             print("You decided not too loot the apartment")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory()
         else:
             print("INVALID MOVE")
             return self.enter()
@@ -72,12 +100,15 @@ class Gym(Scene):
             return self.help()
         elif choice.upper() == "LOOT":
             print("You loot the GYM")
-            return self.loot(3)
+            self.loot(3)
+            return self.loot_Success()
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"
         elif choice.upper() == "LEAVE":
             print("You decided not too loot the GYM")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory()
         else:
             print("INVALID MOVE")
             return self.enter()
@@ -91,12 +122,15 @@ class Parked_Car(Scene):
             return self.help()
         elif choice.upper() == "LOOT":
             print("You loot the car")
-            return self.loot(2)
+            self.loot(2)
+            return self.loot_Success()
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"
         elif choice.upper() == "LEAVE":
             print("You decided not too loot the car")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory()
         else:
             print("INVALID MOVE")
             return self.enter()
@@ -110,12 +144,15 @@ class Thaddeus_Stevens(Scene):
             return self.help()
         elif choice.upper() == "LOOT":
             print("You loot the campus")
-            return self.loot(5)
+            self.loot(5)
+            return self.loot_Success()
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"
         elif choice.upper() == "LEAVE":
             print("You decided not too loot the campus")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory()
         else:
             print("INVALID MOVE")
             return self.enter()
@@ -130,12 +167,15 @@ wall where you could squeeze through. Do you want to loot it? Risk: 2/10""")
             return self.help()
         elif choice.upper() == "LOOT":
             print("You loot the market")
-            return self.loot(2)
+            self.loot(2)
+            return self.loot_Success()
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"
         elif choice.upper() == "LEAVE":
             print("You decided not too loot the market")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory()
         else:
             print("INVALID MOVE")
             return self.enter()
@@ -143,18 +183,21 @@ wall where you could squeeze through. Do you want to loot it? Risk: 2/10""")
 
 class Fulton_Theater(Scene):
     def enter(self):
-        print("You come across the Fulton Theater. There is a window open. Do you enter? Risk: 3/10")
+        print("You come across the Fulton Theater. There is a window open. Do you loot? Risk: 3/10")
         choice = input("> ")
         if choice.upper() == "HELP":
             return self.help()
         elif choice.upper() == "LOOT":
             print("You loot the building")
-            return self.loot(3)
+            self.loot(3)
+            return self.loot_Success()
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"
         elif choice.upper() == "LEAVE":
             print("You decided not too loot the theater")
+        elif choice.upper() == "INVENTORY":
+            return self.inventory()
         else:
             print("INVALID MOVE")
             return self.enter()

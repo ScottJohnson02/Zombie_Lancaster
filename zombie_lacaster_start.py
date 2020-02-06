@@ -15,7 +15,8 @@ class Game(object):
         while len(self.map.scenes) > 1:
             current = self.map.scenes[0].enter()
             if current == "death":
-                print('You are die')
+                print("""You failed to loot the area. You get swarmed by zombies due
+to the noise of you frantically searching. GAME OVER!""")
                 break
             elif current == "help":
                 pass

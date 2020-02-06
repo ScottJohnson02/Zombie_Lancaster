@@ -1,3 +1,6 @@
+import player
+
+
 class Item(object):
     def __init__(self, name, attack, armor, health, rarity):
         self.name = name
@@ -20,6 +23,7 @@ class Inventory(object):
     def print_items(self):
         # print your items
         print("YOUR INVENTORY:")
+        print('-' * 20)
         for item in self.items.values():
             # checks each item in the players inventory and prints a description
             print(f"{item.name}: provides ", end='')
@@ -29,10 +33,49 @@ class Inventory(object):
                 print(f"{item.armor} armor when worn")
             if item.health > 0:
                 print(f"{item.health} health when consumed/used")
+        print('-' * 20)
+
+    def equip(self):
+        self.player = player.character
+        print("YOUR INVENTORY:")
+        print('-' * 20)
+        for item in self.items.values():
+            # checks each item in the players inventory and prints a description
+            print(f"{item.name}: provides ", end='')
+            if item.attack > 0:
+                print(f"{item.attack} attack when equiped")
+            if item.armor > 0:
+                print(f"{item.armor} armor when worn")
+            if item.health > 0:
+                print(f"{item.health} health when consumed/used")
+        print('-' * 20)
+        print("which item do you want to use? (Type exit to exit)")
+        choice = 'cvjhscj'
+        while choice.upper() != 'EXIT':
+            choice = input("> ")
+            if choice in self.items:
+                equipment = self.items.get(choice)
+                print(equipment.health)
+                print(equipment.name)
+                print(f"You used {choice}")
+                self.player.hp += equipment.health
+                self.player.atk = equipment.attack
+                self.player.defense = equipment.armor
+                if equipment.health > 0:
+                    self.items.pop(choice)
+                print(f"""NEW STATS:
+HEALTH : {self.player.hp}
+ATTACK: {self.player.atk}
+DEFENSE: {self.player.defense} """)
+                break
+            elif choice.upper() == 'EXIT':
+                break
+            else:
+                print("invalid move (caps matter)!")
 
 
 inventory = Inventory()
-# inventory.add_item(Item('Bandage', 0, 0, 2, 5))
+inventory.add_item(Item('Bandage', 0, 0, 2, 5))
 # inventory.add_item(Item('Beanie', 0, 1, 0), 5)
 # inventory.print_items()
 

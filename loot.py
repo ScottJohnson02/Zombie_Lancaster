@@ -16,10 +16,11 @@ class Loot(object):
 
     def find(self, number):
         # decides what loot you get depending on your number
-        self.number = random.randint(1, number)
+        self.number = random.randint(1, number + 1)
         self.inventory = inventory.inventory
         self.found_loot = []
         counter = 0
+        print('-' * 20)
         if self.number == 0:
             print('You found no loot :(')
         while counter < self.number:
@@ -46,6 +47,7 @@ class Loot(object):
                 print(f"Provides {item.health} health when selected")
             self.inventory.add_item(item)
             counter += 1
+            print('-' * 20)
 
 
 # bruh = Loot()
