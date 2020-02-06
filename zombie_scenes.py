@@ -66,29 +66,100 @@ class Apartment(Scene):
 
 class Gym(Scene):
     def enter(self):
-        print('gym')
+        print("You come across the old GYM with an open door what do you do? Risk: 3/10")
+        choice = input("> ")
+        if choice.upper() == "HELP":
+            return self.help()
+        elif choice.upper() == "LOOT":
+            print("You loot the GYM")
+            return self.loot(3)
+        elif choice.upper() == "DIE":
+            print("Wrong move")
+            return "death"
+        elif choice.upper() == "LEAVE":
+            print("You decided not too loot the GYM")
+        else:
+            print("INVALID MOVE")
+            return self.enter()
 
 
 class Parked_Car(Scene):
     def enter(self):
-        print('car')
+        print("You come across a parked car with an open door what do you do? Risk: 2/10")
+        choice = input("> ")
+        if choice.upper() == "HELP":
+            return self.help()
+        elif choice.upper() == "LOOT":
+            print("You loot the car")
+            return self.loot(2)
+        elif choice.upper() == "DIE":
+            print("Wrong move")
+            return "death"
+        elif choice.upper() == "LEAVE":
+            print("You decided not too loot the car")
+        else:
+            print("INVALID MOVE")
+            return self.enter()
 
 
 class Thaddeus_Stevens(Scene):
     def enter(self):
-        pass
+        print("You come to the Thaddeus Stevens main campus. Do you loot the campus? Risk: 5/10!")
+        choice = input("> ")
+        if choice.upper() == "HELP":
+            return self.help()
+        elif choice.upper() == "LOOT":
+            print("You loot the campus")
+            return self.loot(5)
+        elif choice.upper() == "DIE":
+            print("Wrong move")
+            return "death"
+        elif choice.upper() == "LEAVE":
+            print("You decided not too loot the campus")
+        else:
+            print("INVALID MOVE")
+            return self.enter()
 
 
 class Central_Market(Scene):
     def enter(self):
-        pass
+        print("""You come across the Central Market. There is a hole in the
+wall where you could squeeze through. Do you want to loot it? Risk: 2/10""")
+        choice = input("> ")
+        if choice.upper() == "HELP":
+            return self.help()
+        elif choice.upper() == "LOOT":
+            print("You loot the market")
+            return self.loot(2)
+        elif choice.upper() == "DIE":
+            print("Wrong move")
+            return "death"
+        elif choice.upper() == "LEAVE":
+            print("You decided not too loot the market")
+        else:
+            print("INVALID MOVE")
+            return self.enter()
 
 
 class Fulton_Theater(Scene):
     def enter(self):
-        pass
+        print("You come across the Fulton Theater. There is a window open. Do you enter? Risk: 3/10")
+        choice = input("> ")
+        if choice.upper() == "HELP":
+            return self.help()
+        elif choice.upper() == "LOOT":
+            print("You loot the building")
+            return self.loot(3)
+        elif choice.upper() == "DIE":
+            print("Wrong move")
+            return "death"
+        elif choice.upper() == "LEAVE":
+            print("You decided not too loot the theater")
+        else:
+            print("INVALID MOVE")
+            return self.enter()
 
 
 class Finish(Scene):
     def enter(self):
-        print("You win")
+        print("You win and go to a local farm and live out your last of days")
