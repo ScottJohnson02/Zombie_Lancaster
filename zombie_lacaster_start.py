@@ -5,6 +5,8 @@ import random
 
 
 class Game(object):
+    """Runs the game"""
+
     def __init__(self, game_map, gameover):
         self.map = game_map
         self.gameover = gameover

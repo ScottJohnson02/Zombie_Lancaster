@@ -2,15 +2,14 @@ import inventory
 import loot
 import random
 
-# need dedent
 
-
+# generic scene
 class Scene(object):
     def __init__(self):
         self.inventory_system = inventory.inventory
-    # generic scene
 
     def help(self):
+        """Shows all possible commands in the game"""
         print("""COMMANDS: loot - allows you to loot a building and search for items
 leave - don't loot an area and continue walking
 inventory - allows you to equip items and consume health items
@@ -18,6 +17,7 @@ help - enters this screen""")
         return self.enter()
 
     def loot(self, risk):
+        """Takes a number and is equivelent to 1/10 for 1 and 2/10 for 2 etc..."""
         # risk is a 1 out of 10 chance to get killed
         self.risk = random.randint(1, 10)
         if 1 <= self.risk <= risk:
@@ -28,14 +28,17 @@ help - enters this screen""")
             self.loot.find(risk)
 
     def inventory(self):
+        """inventory system for beginning of scene"""
         self.inventory_system.equip()
         return self.enter()
 
     def inventory2(self):
+        """inventory system for end of scene if looting is successful"""
         self.inventory_system.equip()
         return 'next'
 
     def loot_Success(self):
+        """Asks the user for input after the scene to see if they want to do anything"""
         print("Do you want to do anything before you go to the next location? type continue to continue")
         choice = input("> ")
         if choice.upper() == "HELP":
@@ -44,6 +47,7 @@ help - enters this screen""")
             print("Wrong move")
             return "death"
         elif choice.upper() == "CONTINUE":
+            # continues with the game
             print("You decided to head on the road")
         elif choice.upper() == "INVENTORY":
             return self.inventory2()

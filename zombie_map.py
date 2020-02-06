@@ -7,6 +7,7 @@ game_length = 3
 
 class Map(object):
     def __init__(self):
+        # all the scenes in the game
         self.scenes = [zombie_scenes.Apartment(), zombie_scenes.Gym(),
                        zombie_scenes.Parked_Car(),
                        zombie_scenes.Thaddeus_Stevens(), zombie_scenes.Central_Market(),
@@ -15,7 +16,9 @@ class Map(object):
         self.zombie = zombie_encounters.Zombie()
 
     def create(self):
+        """Builds the game map"""
         random.shuffle(self.scenes)
+        # shuffles the list of scenes
         while len(self.scenes) > game_length:
             self.scenes.pop()
         self.scenes.insert(0, zombie_scenes.Start())
@@ -23,6 +26,7 @@ class Map(object):
         self.current = self.scenes[0]
 
     def next(self):
+        """Goes to next scene in list and has a chance for zombie encounter"""
         encounter_number = random.randint(0, 2)
         counter = 0
         while counter <= encounter_number:

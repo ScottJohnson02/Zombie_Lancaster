@@ -4,10 +4,12 @@ import random
 
 class Loot(object):
     def __init__(self):
-        # adds a possible item to a list and takes the item rarity to determine how many of that item is put in the list
+        """adds all possible items to a list and takes the item rarity to determine
+         how many of that item is put in the list"""
         self.loot = []
         self.items = inventory.possible_items
         count = 0
+        # takes every item in the catalog and places multiple items depending on rarity
         for item in self.items.values():
             while item.rarity > count:
                 count += 1
@@ -15,7 +17,7 @@ class Loot(object):
             count = 0
 
     def find(self, number):
-        # decides what loot you get depending on your number
+        """Takes a number and gives you any amount of items from 1 to the number taken as an argument"""
         self.number = random.randint(1, number + 1)
         self.inventory = inventory.inventory
         self.found_loot = []
@@ -24,10 +26,12 @@ class Loot(object):
         if self.number == 0:
             print('You found no loot :(')
         while counter < self.number:
+            # puts a random item in the found loot list
             random.shuffle(self.loot)
             item = self.loot[0]
             self.found_loot.append(item)
             self.loot.pop(0)
+            # checks the rarity of the item
             print(f"You found a(n) {item.name} Rarity: ", end='')
             if item.rarity == 1:
                 print("*" * 5)

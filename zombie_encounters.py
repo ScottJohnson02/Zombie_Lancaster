@@ -4,6 +4,8 @@ import time
 
 
 class Zombie(object):
+    """Creates a zombie with the atributes name , health, defense, and attack"""
+
     def create(self, name, health, defense, attack):
         self.hp = health
         self.defense = defense
@@ -13,12 +15,15 @@ class Zombie(object):
 
 
 class CreateEncounter(object):
+
     def start(self, enemy):
+        """Creates a combat exchange between player and a zombie"""
         # enemy has hp,def,atk,and name atributes
         self.player = player.character
         self.enemy = enemy
 
         def human_crit_calc(dmg, name, zombie_armor, zombie_health):
+            # calculates damage done to zombie
             count = random.randint(1, 10)
             new_dmg = dmg - zombie_armor
             if new_dmg < 0:
@@ -35,6 +40,7 @@ class CreateEncounter(object):
                 return zombie_health
 
         def zombie_crit_calc(dmg, name, human_armor, human_health):
+            # calculates damage done to player
             count = random.randint(1, 15)
             new_dmg = dmg - human_armor
             if new_dmg < 0:

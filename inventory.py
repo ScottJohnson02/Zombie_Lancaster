@@ -3,6 +3,7 @@ import player
 
 class Item(object):
     def __init__(self, name, attack, armor, health, rarity):
+        """creates an item given arguments : name , attack,armor,health,rarity"""
         self.name = name
         self.attack = attack
         self.armor = armor
@@ -13,15 +14,18 @@ class Item(object):
 
 
 class Inventory(object):
+    """Initailizes player inventory"""
+
     def __init__(self):
         self.items = {}
 
     def add_item(self, item):
+        """Adds item to player inventory"""
         # add an item to your inventory
         self.items[item.name] = item
 
     def print_items(self):
-        # print your items
+        """ print your items in your inventory"""
         print("YOUR INVENTORY:")
         print('-' * 20)
         for item in self.items.values():
@@ -36,6 +40,7 @@ class Inventory(object):
         print('-' * 20)
 
     def equip(self):
+        """ print your items in your inventory and have the option to equip"""
         self.player = player.character
         print("YOUR INVENTORY:")
         print('-' * 20)
@@ -79,6 +84,8 @@ inventory.add_item(Item('Bandage', 0, 0, 2, 5))
 inventory.add_item(Item('Beanie', 0, 1, 0, 5))
 # inventory.print_items()
 
+
+# catalog of items
 possible_items = {
     'Bandage': Item('Bandage', 0, 0, 2, 4),
     'Beanie': Item('Beanie', 0, 1, 0, 4),
