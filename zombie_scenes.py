@@ -1,11 +1,15 @@
 import inventory
 import loot
 import random
+# need dedent
 
 
 class Scene(object):
     def help(self):
-        print("ENTER HOW TO PLAY AN ADDED FEATURES HERE")
+        print("""COMMANDS: loot - allows you to loot a building and search for items
+leave - don't loot an area and continue walking
+inventory - allows you to equip items and consume health items
+help - enters this screen""")
         return self.enter()
 
     def loot(self, risk):
@@ -29,12 +33,21 @@ class Scene(object):
 
 class Start(Scene):
     def enter(self):
-        print("Welcome to Lancaster")
+        print("""Welcome to Lancaster
+TYPE Help to learn to play or type start to start your adventure""")
+        choice = input("> ")
+        if choice.upper() == "HELP":
+            return self.help()
+        elif choice.upper() == "START":
+            print("")
+        else:
+            print("INVALID MOVE")
+            return self.enter()
 
 
 class Apartment(Scene):
     def enter(self):
-        print("You are in an apartment what do you do")
+        print("You come across an appartment with an open door what do you do?")
         choice = input("> ")
         if choice.upper() == "HELP":
             return self.help()
@@ -44,6 +57,8 @@ class Apartment(Scene):
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"
+        elif choice.upper() == "LEAVE":
+            print("You decided not too loot the apartment")
         else:
             print("INVALID MOVE")
             return self.enter()

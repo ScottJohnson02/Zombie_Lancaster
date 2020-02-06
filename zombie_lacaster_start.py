@@ -12,7 +12,6 @@ class Game(object):
     def play(self):
         index = 0
         self.map.create()
-        print(self.map.scenes[index])
         while len(self.map.scenes) > 1:
             current = self.map.scenes[0].enter()
             if current == "death":
