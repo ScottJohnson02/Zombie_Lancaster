@@ -1,16 +1,30 @@
 import inventory
+import loot
+import random
 
 
 class Scene(object):
     def help(self):
         print("ENTER HOW TO PLAY AN ADDED FEATURES HERE")
+        return self.enter()
 
-    def loot(self):
-        self.items = inventory.possible_items
-        print(self.items)
+    def loot(self, risk):
+        # risk is a 1 out of 10 chance to get killed
+        self.risk = random.randint(1, 10)
+        if 1 <= self.risk <= risk:
+            return "death"
+
+        else:
+            self.loot = loot.Loot()
+            self.loot.find(risk)
 
     def inventory(self):
-        pass
+        self.inventory = inventory.inventory
+        self.inventory.print_items()
+
+
+# bruh = Scene()
+# bruh.loot(6)
 
 
 class Start(Scene):
@@ -23,10 +37,10 @@ class Apartment(Scene):
         print("You are in an apartment what do you do")
         choice = input("> ")
         if choice.upper() == "HELP":
-            print('This will show hints and continue the scene')
-            return self.enter()
+            return self.help()
         elif choice.upper() == "LOOT":
             print("You loot the apartment")
+            return self.loot(1)
         elif choice.upper() == "DIE":
             print("Wrong move")
             return "death"

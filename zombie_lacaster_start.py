@@ -16,7 +16,7 @@ class Game(object):
         while len(self.map.scenes) > 1:
             current = self.map.scenes[0].enter()
             if current == "death":
-                self.gameover
+                print('You are die')
                 break
             elif current == "help":
                 pass
