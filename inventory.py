@@ -64,8 +64,10 @@ class Inventory(object):
                 print(equipment.name)
                 print(f"You used {choice}")
                 self.player.hp += equipment.health
-                self.player.atk += equipment.attack
-                self.player.defense += equipment.armor
+                if equipment.attack > 0:
+                    self.player.atk == equipment.attack
+                if equipment.armor > 0:
+                    self.player.defense += equipment.armor
                 if equipment.health > 0:
                     self.items.pop(choice)
                 print(f"""NEW STATS:
@@ -97,7 +99,7 @@ possible_items = {
     'Pistol': Item('Pistol', 7, 0, 0, 3),
     'Sharp Pencil': Item('Sharp Pencil', 1, 0, 0, 1),
     'Barbed Bat': Item('Barbed Bat', 7, 0, 0, 3),
-    'Riot Gear': Item('Riot Gear', 0, 10, 0, 1),
+    'Riot Gear': Item('Riot Gear', 0, 3, 0, 1),
     'Chef Knife': Item('Chefs Knife', 5, 0, 0, 4),
     'Butchers Knife': Item('Butchers Knife', 7, 0, 0, 3),
     'Fedor Fighting Knife': Item('Fedor Fighting Knife', 10, 0, 0, 1),

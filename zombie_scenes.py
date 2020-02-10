@@ -1,6 +1,7 @@
 import inventory
 import loot
 import random
+from textwrap import dedent
 
 
 # generic scene
@@ -10,10 +11,13 @@ class Scene(object):
 
     def help(self):
         """Shows all possible commands in the game"""
-        print("""COMMANDS: loot - allows you to loot a building and search for items
-leave - don't loot an area and continue walking
-inventory - allows you to equip items and consume health items
-help - enters this screen""")
+        print(dedent("""-----COMMANDS-----
+        ---------------------------------------------------------------
+        loot - allows you to loot a building and search for items
+        leave - don't loot an area and continue walking
+        inventory - allows you to equip items and consume health items
+        help - enters this screen
+        ---------------------------------------------------------------"""))
         return self.enter()
 
     def loot(self, risk):
@@ -58,9 +62,29 @@ help - enters this screen""")
 
 class Start(Scene):
     def enter(self):
-        print("""Welcome to Lancaster
-TYPE Help to learn to play or type start to start your adventure you can also type
-inventory to equip items before your adventure""")
+        print(dedent("""
+        ----------------------------------------------------------------------------
+
+        The year is 20XX and due to an unknown pathogen outbreak civilization as
+        we know it has been reduced to rubble. Larger cities fell first due to the
+        population density. You are currently in your old apartment but the Z's are
+        pounding on your rear door and will break through any moment. You decide
+        to gather what you can and you bolt out the front door and head on the
+        streets. You know that it is safer on the outskirts of the city but you
+        have to go through the thick of it if you want to escape to the other
+        side and get to a local farm and live out the rest of days.
+
+        ----------------------------------------------------------------------------
+
+        HOW TO PLAY: You will walk around on the streets looking for places to loot
+        and you will encounter zombies that you will have to fight in order to keep
+        progressing. Once you get to a new location you will have the option to
+        loot the area or leave. There is also a risk associated with each location
+        1 is 10% chance and 5 is 50% chance to fail. However the higher the risk
+        the higher chance you have to find powerful loot. You can also press type
+        "inventory" at anytime to view your current inventory and equip items.
+        You currently have a few items in your inventory when you are done equipping
+        gear type "start" to begin your adventure through Lancaster City"""))
         choice = input("> ")
         if choice.upper() == "HELP":
             return self.help()
